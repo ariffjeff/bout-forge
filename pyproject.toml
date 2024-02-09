@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "bout-forge"
+version = "0.1.0"
+description = "Easily organize fencers and teams for fencing tournaments, optimizing fencer placement based on preferences and skill levels."
+authors = ["Ariff Jeff <ariffjeff@icloud.com>"]
+license = "AGPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry_bumpversion.file."bout_forge/__init__.py"]
