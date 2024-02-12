@@ -1,0 +1,35 @@
+{
+    "teams": [
+      {
+        "team_name": "Team A",
+        "fencers": [
+          {
+            "name_first": "Alice",
+            "name_last": "Smith",
+            "weapons": ["Foil", "Sabre"]
+          },
+          {
+            "name_first": "Bob",
+            "name_last": "Jones",
+            "weapons": ["Epee"]
+          }
+        ]
+      },
+      {
+        "team_name": "Team B",
+        "fencers": [
+          {
+            "name_first": "Charlie",
+            "name_last": "Brown",
+            "weapons": ["Foil", "Epee"]
+          },
+          {
+            "name_first": "Diana",
+            "name_last": "Johnson",
+            "weapons": ["Sabre"]
+          }
+        ]
+      }
+    ]
+  }
+  

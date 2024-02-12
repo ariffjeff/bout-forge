@@ -1,18 +1,25 @@
+from bout_forge.team_manager import Team
+
 class Event:
     def __init__(self, name, date, location) -> None:
         self.name = name
         self.date = date
         self.location = location
+        self.teams = {}
 
         # self.id = id # unique id calculated from name and date
 
-    def add_team(self, team):
+    def add_teams(self, teams: Team | list):
         '''
-        Assign a team to this event.
+        Assign teams to this event.
         '''
-        
+        if not isinstance(teams, list):
+            teams = [teams]
 
-    def remove_team(self, team):
+        for team in teams:
+            self.teams[team.id] = team
+
+    def remove_teams(self, teams):
         '''
         Remove a team from this event.
         '''
@@ -28,11 +35,23 @@ class Event:
         pass
 
 
+class Session:
+    '''
+    A complete set of fencing activity such as a full round of pool bouts, relay bouts, or a direct elimination bout.
+    '''
+    def __init__(self) -> None:
+        self.fencers = []
 
-from datetime import datetime
-from bout_forge.bout_forge import Team
 
-event1 = Event("Winter Classic", datetime.now(), "East Lyme High School")
-team1 = Team()
+class Pool(Session):
+    def __init__(self) -> None:
+        super().__init__()
 
-event1.add_team(team1)
+class Relay(Session):
+    def __init__(self) -> None:
+        super().__init__()
+    
+class DirectElimination(Session):
+    def __init__(self) -> None:
+        super().__init__()
+

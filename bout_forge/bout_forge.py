@@ -1,8 +1,25 @@
-from bout_forge.team_manager import Team, Fencer, WeaponType
+from bout_forge.team_manager import Team, Fencer, WeaponType, TeamManager
+from bout_forge.event_manager import Event
 
 
 def main():
-    team = Team("East Lyme")
+
+    from datetime import datetime
+    from bout_forge.bout_forge import Team
+    from pathlib import Path
+
+    teams_data = Path("bout_forge/config/teams.json")
+    team_manager = TeamManager(teams_data)
+
+
+    event = Event("Winter Classic", datetime.now(), "East Lyme High School")
+    teams = [
+        Team("East Lyme"),
+        Team("Waterford")
+    ]
+
+    event.add_teams(teams)
+
 
     fencer1 = Fencer("Alice", "Aorta")
     fencer1.add_weapons([WeaponType.FOIL, WeaponType.SABRE])
