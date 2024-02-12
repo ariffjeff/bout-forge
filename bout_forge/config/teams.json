@@ -6,12 +6,20 @@
           {
             "name_first": "Alice",
             "name_last": "Smith",
-            "weapons": ["Foil", "Sabre"]
+            "weapons": {
+              "foil": true,
+              "epee": false,
+              "sabre": true
+            }
           },
           {
             "name_first": "Bob",
             "name_last": "Jones",
-            "weapons": ["Epee"]
+            "weapons": {
+              "foil": false,
+              "epee": true,
+              "sabre": false
+            }
           }
         ]
       },
@@ -21,12 +29,20 @@
           {
             "name_first": "Charlie",
             "name_last": "Brown",
-            "weapons": ["Foil", "Epee"]
+            "weapons": {
+              "foil": true,
+              "epee": true,
+              "sabre": true
+            }
           },
           {
             "name_first": "Diana",
             "name_last": "Johnson",
-            "weapons": ["Sabre"]
+            "weapons": {
+              "foil": false,
+              "epee": false,
+              "sabre": true
+            }
           }
         ]
       }
