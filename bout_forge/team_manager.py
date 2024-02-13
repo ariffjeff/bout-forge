@@ -1,8 +1,10 @@
+import json
 from enum import Enum
+from pathlib import Path
+from typing import List, Union
 
 import pandas as pd
-import json
-from pathlib import Path
+
 
 class WeaponType(Enum):
     FOIL = "foil"
@@ -36,7 +38,7 @@ class Sabre(Weapon):
 class Fencer:
     _id_counter = 0  # Class variable to generate unique IDs
 
-    def __init__(self, name_first, name_last=None, weapons:WeaponType | list=None):
+    def __init__(self, name_first=None, name_last=None, weapons:WeaponType | list=None):
         self.id = Fencer._id_counter  # Assign unique ID
         Fencer._id_counter += 1  # Increment ID counter
 
@@ -44,10 +46,10 @@ class Fencer:
         self.name_last = name_last
 
         for weapon_type in WeaponType:
-                    setattr(self, weapon_type.name.lower(), False)
+            setattr(self, weapon_type.value, False)
 
         if weapons:
-            if not isinstance(weapons, list): # THIS IS CONFUSING SINCE WEAPONS ARG FROM LINE39 COULD BE ANYTIHNG MAYBE?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+            if not isinstance(weapons, list):
                 weapons = [weapons]
             if not isinstance(weapons[0], WeaponType) and not isinstance(weapons[0], str):
                 raise TypeError('Weapons must be objects of WeaponType or str')
@@ -57,7 +59,7 @@ class Fencer:
                     weapons[i] = WeaponType[weapon_type.upper()]
             self.add_weapons(weapons)
 
-    def add_weapons(self, weapons: WeaponType | list):
+    def add_weapons(self, weapons: Union[WeaponType, List[WeaponType]]):
         '''
         Add the weapons this fencer is capable of using.
         This does not refer to the weapons a fencer will actually be using at any given event.
@@ -65,14 +67,31 @@ class Fencer:
         if not isinstance(weapons, list):
             weapons = [weapons]
         for weapon_type in weapons:
-            if weapon_type in self.weapons:
-                self.weapons[weapon_type] = True
+            if weapon_type in WeaponType:
+                setattr(self, weapon_type.value, True)
 
-    def remove_weapon(self, weapon):
-        if weapon in self.weapons:
-            self.weapons.remove(weapon)
-        else:
-            print(f"{self.name_first, self.name_last} does not have {weapon}.")
+    # def remove_weapon(self, weapon):
+    #     if weapon in self.weapons:
+    #         self.weapons.remove(weapon)
+    #     else:
+    #         print(f"{self.name_first, self.name_last} does not have {weapon}.")
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "name_first": self.name_first,
+            "name_last": self.name_last,
+            "foil": self.foil,
+            "epee": self.epee,
+            "sabre": self.sabre,
+        }
+    
+    def intake_dict(self, d: dict) -> None:
+        self.name_first = d["name_first"]
+        self.name_last = d["name_last"]
+        self.foil = d["foil"]
+        self.epee = d["epee"]
+        self.sabre = d["sabre"]
 
 
 class Team:
@@ -83,7 +102,7 @@ class Team:
         Team._id_counter += 1
 
         self.name = name
-        self.fencers = pd.DataFrame(columns=["Name", "Weapons"])
+        self.fencers = pd.DataFrame()
 
     def add_coach(self, name):
         pass
@@ -91,15 +110,9 @@ class Team:
     def remove_coach(self, name):
         pass
 
-    def add_fencer(self, fencer):
-        new_row = {
-            "name_first": fencer.name_first,
-            "name_last": fencer.name_last,
-            "Weapons": fencer.weapons,
-        }
-        self.fencers = pd.concat(
-            [self.fencers, pd.DataFrame([new_row])], ignore_index=True
-        )
+    def add_fencer(self, fencer: Fencer):
+        row = fencer.to_dict()
+        self.fencers = pd.concat([self.fencers, pd.DataFrame([row])], ignore_index=True)
 
     def remove_fencer(self, fencer_id):
         self.fencers = [f for f in self.fencers if f.id != fencer_id]
@@ -109,9 +122,9 @@ class TeamManager:
     def __init__(self, json_file: Path) -> None:
         self.json_file = json_file
         self.teams = []
-        self.load_and_build_data()
+        self.load_json_and_build()
 
-    def load_and_build_data(self):
+    def load_json_and_build(self):
         with open(self.json_file) as file:
             data = json.load(file)
             for team in data['teams']:
@@ -119,7 +132,8 @@ class TeamManager:
                 fencers = team['fencers']
                 team = Team(team_name)
                 for fencer_data in fencers:
-                    fencer = Fencer(fencer_data['name_first'], fencer_data['name_last'], fencer_data['weapons'])
+                    fencer = Fencer()
+                    fencer.intake_dict(fencer_data)
                     team.add_fencer(fencer)
                 self.teams.append(team)
 

@@ -1,51 +1,42 @@
 {
     "teams": [
-      {
-        "team_name": "Team A",
-        "fencers": [
-          {
-            "name_first": "Alice",
-            "name_last": "Smith",
-            "weapons": {
-              "foil": true,
-              "epee": false,
-              "sabre": true
-            }
-          },
-          {
-            "name_first": "Bob",
-            "name_last": "Jones",
-            "weapons": {
-              "foil": false,
-              "epee": true,
-              "sabre": false
-            }
-          }
-        ]
-      },
-      {
-        "team_name": "Team B",
-        "fencers": [
-          {
-            "name_first": "Charlie",
-            "name_last": "Brown",
-            "weapons": {
-              "foil": true,
-              "epee": true,
-              "sabre": true
-            }
-          },
-          {
-            "name_first": "Diana",
-            "name_last": "Johnson",
-            "weapons": {
-              "foil": false,
-              "epee": false,
-              "sabre": true
-            }
-          }
-        ]
-      }
+        {
+            "team_name": "Team A",
+            "fencers": [
+                {
+                    "name_first": "Alice",
+                    "name_last": "Smith",
+                    "foil": true,
+                    "epee": false,
+                    "sabre": true
+                },
+                {
+                    "name_first": "Bob",
+                    "name_last": "Jones",
+                    "foil": false,
+                    "epee": true,
+                    "sabre": false
+                }
+            ]
+        },
+        {
+            "team_name": "Team B",
+            "fencers": [
+                {
+                    "name_first": "Charlie",
+                    "name_last": "Brown",
+                    "foil": true,
+                    "epee": true,
+                    "sabre": true
+                },
+                {
+                    "name_first": "Diana",
+                    "name_last": "Johnson",
+                    "foil": false,
+                    "epee": false,
+                    "sabre": true
+                }
+            ]
+        }
     ]
-  }
-  
+}
