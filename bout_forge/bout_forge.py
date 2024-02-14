@@ -9,6 +9,7 @@ def main():
     from pathlib import Path
 
     # example: load json and create objects
+    # team_manager_nodata = TeamManager()
     team_manager = TeamManager(Path("bout_forge/config/teams.json"))
 
     # example: create data manually

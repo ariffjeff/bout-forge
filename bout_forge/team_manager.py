@@ -122,12 +122,13 @@ class Team:
 
 
 class TeamManager:
-    def __init__(self, json_file: Path) -> None:
-        self.json_file = json_file
+    def __init__(self, json_file: Path=None) -> None:
         self.teams = []
-        self.load_json_and_build()
+        self.json_file = json_file
+        if json_file:
+            self.load_json_and_build()
 
-    def load_json_and_build(self):
+    def load_json_and_build(self) -> None:
         with open(self.json_file) as file:
             data = json.load(file)
             for team in data['teams']:
