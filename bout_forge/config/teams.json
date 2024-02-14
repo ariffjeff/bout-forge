@@ -6,6 +6,7 @@
                 {
                     "name_first": "Alice",
                     "name_last": "Smith",
+                    "gender": "female",
                     "foil": true,
                     "epee": false,
                     "sabre": true
@@ -13,6 +14,7 @@
                 {
                     "name_first": "Bob",
                     "name_last": "Jones",
+                    "gender": "male",
                     "foil": false,
                     "epee": true,
                     "sabre": false
@@ -25,6 +27,7 @@
                 {
                     "name_first": "Charlie",
                     "name_last": "Brown",
+                    "gender": "male",
                     "foil": true,
                     "epee": true,
                     "sabre": true
@@ -32,6 +35,7 @@
                 {
                     "name_first": "Diana",
                     "name_last": "Johnson",
+                    "gender": "female",
                     "foil": false,
                     "epee": false,
                     "sabre": true

@@ -21,7 +21,7 @@ def main():
     event.add_teams(teams)
 
 
-    fencer1 = Fencer("Alice", "Aorta")
+    fencer1 = Fencer("Alice", "Aorta", "female")
     fencer1.add_weapons([WeaponType.FOIL, WeaponType.SABRE])
     teams[0].add_fencer(fencer1)
 

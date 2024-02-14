@@ -38,12 +38,13 @@ class Sabre(Weapon):
 class Fencer:
     _id_counter = 0  # Class variable to generate unique IDs
 
-    def __init__(self, name_first=None, name_last=None, weapons:WeaponType | list=None):
+    def __init__(self, name_first=None, name_last=None, gender=None, weapons:WeaponType | list=None):
         self.id = Fencer._id_counter  # Assign unique ID
         Fencer._id_counter += 1  # Increment ID counter
 
         self.name_first = name_first
         self.name_last = name_last
+        self.gender = gender
 
         for weapon_type in WeaponType:
             setattr(self, weapon_type.value, False)
@@ -81,6 +82,7 @@ class Fencer:
             "id": self.id,
             "name_first": self.name_first,
             "name_last": self.name_last,
+            "gender": self.gender,
             "foil": self.foil,
             "epee": self.epee,
             "sabre": self.sabre,
@@ -89,6 +91,7 @@ class Fencer:
     def intake_dict(self, d: dict) -> None:
         self.name_first = d["name_first"]
         self.name_last = d["name_last"]
+        self.gender = d["gender"]
         self.foil = d["foil"]
         self.epee = d["epee"]
         self.sabre = d["sabre"]
