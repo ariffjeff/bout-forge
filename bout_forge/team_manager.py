@@ -141,6 +141,9 @@ class TeamManager:
                     team.add_fencer(fencer)
                 self.teams.append(team)
 
+    def write_json_config(self) -> None:
+        pass
+
     def print_teams(self):
         for team in self.teams:
             print("Team:", team.name)
